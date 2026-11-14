@@ -1,17 +1,17 @@
 # Visual Studio
 .vs/
-*.suo
 *.user
-*.userosscache
-*.sln.docstates
+*.suo
 
-# Build files
-bin/
-obj/
+# Build
+[Bb]in/
+[Oo]bj/
 
 # IDE
 .idea/
 
-# System
-.DS_Store
-Thumbs.db
+# User-specific settings
+*.userprefs
+
+# Secrets
+secrets.json
