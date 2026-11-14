@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TruckDating.Backend.Models;
+using TruckDating.Backend.Models.Entities;
+using TruckDating.Backend.Models.Enums;
 
 namespace TruckDating.Backend.Data;
 

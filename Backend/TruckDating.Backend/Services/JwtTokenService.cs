@@ -2,7 +2,7 @@
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
-using TruckDating.Backend.Models;
+using TruckDating.Backend.Models.Entities;
 
 namespace TruckDating.Backend.Services;
 

@@ -1,6 +1,7 @@
 ﻿using System;
+using TruckDating.Backend.Models.Enums;
 
-namespace TruckDating.Backend.Models;
+namespace TruckDating.Backend.Models.Entities;
 
 public class User
 {
