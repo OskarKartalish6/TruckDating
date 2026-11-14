@@ -3,11 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TruckDating.Backend.Data;
 using TruckDating.Backend.DTOs.Auth;
-using TruckDating.Backend.Models;
 using TruckDating.Backend.Services;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
+using TruckDating.Backend.Models.Enums;
+using TruckDating.Backend.Models.Entities;
 
 namespace TruckDating.Backend.Controllers;
 

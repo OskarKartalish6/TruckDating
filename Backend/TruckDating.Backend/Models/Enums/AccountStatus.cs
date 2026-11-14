@@ -1,4 +1,4 @@
-﻿namespace TruckDating.Backend.Models;
+﻿namespace TruckDating.Backend.Models.Enums;
 
 public enum AccountStatus
 {

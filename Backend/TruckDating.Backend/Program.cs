@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TruckDating.Backend.Data;
-using TruckDating.Backend.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using TruckDating.Backend.Services;
+using TruckDating.Backend.Models.Entities;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,7 +24,11 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(
-        builder.Configuration.GetConnectionString("DefaultConnection")
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        npgsqlOptions =>
+        {
+            npgsqlOptions.UseNetTopologySuite();
+        }
     )
 );
 var jwtKey = builder.Configuration["Jwt:Key"]
