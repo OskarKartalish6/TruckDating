@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TruckDating.Backend.Models;
 using TruckDating.Backend.Models.Entities;
 using TruckDating.Backend.Models.Enums;
 
@@ -13,51 +14,30 @@ public class ApplicationDbContext : DbContext
     }
 
     public DbSet<User> Users { get; set; }
+    public DbSet<AdminAccount> AdminAccounts { get; set; }
+    public DbSet<UserProfile> UserProfiles { get; set; }
+    public DbSet<DriverProfile> DriverProfiles { get; set; }
+    public DbSet<UserPreference> UserPreferences { get; set; }
+    public DbSet<UserPhoto> UserPhotos { get; set; }
+    public DbSet<Like> Likes { get; set; }
+    public DbSet<Match> Matches { get; set; }
+    public DbSet<Chat> Chats { get; set; }
+    public DbSet<ChatParticipant> ChatParticipants { get; set; }
+    public DbSet<Message> Messages { get; set; }
+    public DbSet<UserLocation> UserLocations { get; set; }
+    public DbSet<RouteStop> RouteStops { get; set; }
+    public DbSet<Block> Blocks { get; set; }
+    public DbSet<Report> Reports { get; set; }
+    public DbSet<ModerationAction> ModerationActions { get; set; }
+    public DbSet<RefreshToken> RefreshTokens { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<User>(entity =>
-        {
-            entity.ToTable("users");
-
-            entity.HasKey(u => u.Id);
-
-            entity.Property(u => u.Id)
-                .HasColumnName("id")
-                .HasDefaultValueSql("gen_random_uuid()");
-
-            entity.Property(u => u.Email)
-                .HasColumnName("email")
-                .IsRequired();
-
-            entity.Property(u => u.PasswordHash)
-                .HasColumnName("password_hash")
-                .IsRequired();
-
-            entity.Property(u => u.Status)
-                .HasColumnName("status")
-                .HasColumnType("account_status")
-                .HasConversion(
-                    status => status.ToString().ToLower(),
-                    value => Enum.Parse<AccountStatus>(
-                        value, true
-                    )
-                )
-                .HasDefaultValue(AccountStatus.Active);
-
-            entity.Property(u => u.EmailVerified)
-                .HasColumnName("email_verified")
-                .HasDefaultValue(false);
-
-            entity.Property(u => u.CreatedAt)
-                .HasColumnName("created_at")
-                .HasDefaultValueSql("now()");
-
-            entity.Property(u => u.UpdatedAt)
-                .HasColumnName("updated_at")
-                .HasDefaultValueSql("now()");
-        });
+        modelBuilder.ApplyConfigurationsFromAssembly(
+            typeof(ApplicationDbContext).Assembly
+        );
     }
+
 }
