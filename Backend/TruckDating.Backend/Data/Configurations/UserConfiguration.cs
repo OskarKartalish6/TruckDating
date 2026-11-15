@@ -29,9 +29,6 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         entity.Property(u => u.Status)
             .HasColumnName("status")
             .HasColumnType("account_status")
-            .HasConversion(
-                status => status.ToString().ToLower(),
-                value => Enum.Parse<AccountStatus>(value, true))
             .HasDefaultValue(AccountStatus.Active);
 
         entity.Property(u => u.EmailVerified)

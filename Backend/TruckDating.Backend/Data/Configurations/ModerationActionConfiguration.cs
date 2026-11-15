@@ -20,10 +20,7 @@ public class ModerationActionConfiguration : IEntityTypeConfiguration<Moderation
 
         entity.Property(x => x.Action)
             .HasColumnName("action")
-            .HasColumnType("moderation_action_type")
-            .HasConversion(
-                x => ToDatabaseValue(x),
-                x => FromDatabaseValue(x));
+            .HasColumnType("moderation_action_type");
 
         entity.Property(x => x.Description).HasColumnName("description");
         entity.Property(x => x.CreatedAt).HasColumnName("created_at").HasDefaultValueSql("now()");
@@ -43,24 +40,4 @@ public class ModerationActionConfiguration : IEntityTypeConfiguration<Moderation
             .HasForeignKey(x => x.ReportId)
             .OnDelete(DeleteBehavior.Restrict);
     }
-
-    private static string ToDatabaseValue(ModerationActionType value) =>
-        value switch
-        {
-            ModerationActionType.PhotoRejected => "photo_rejected",
-            ModerationActionType.UserSuspended => "user_suspended",
-            ModerationActionType.UserUnsuspended => "user_unsuspended",
-            ModerationActionType.UserBanned => "user_banned",
-            _ => value.ToString().ToLower()
-        };
-
-    private static ModerationActionType FromDatabaseValue(string value) =>
-        value switch
-        {
-            "photo_rejected" => ModerationActionType.PhotoRejected,
-            "user_suspended" => ModerationActionType.UserSuspended,
-            "user_unsuspended" => ModerationActionType.UserUnsuspended,
-            "user_banned" => ModerationActionType.UserBanned,
-            _ => Enum.Parse<ModerationActionType>(value, true)
-        };
 }

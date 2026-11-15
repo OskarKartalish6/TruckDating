@@ -35,6 +35,14 @@ public class ApplicationDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
+        // PostgreSQL ENUM types
+        modelBuilder.HasPostgresEnum<AccountStatus>();
+        modelBuilder.HasPostgresEnum<ModerationActionType>();
+        modelBuilder.HasPostgresEnum<PhotoStatus>();
+        modelBuilder.HasPostgresEnum<ReportReason>();
+        modelBuilder.HasPostgresEnum<ReportStatus>();
+
+        // Entity configurations
         modelBuilder.ApplyConfigurationsFromAssembly(
             typeof(ApplicationDbContext).Assembly
         );

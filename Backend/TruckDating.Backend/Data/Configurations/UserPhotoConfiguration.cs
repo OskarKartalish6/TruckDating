@@ -21,9 +21,6 @@ public class UserPhotoConfiguration : IEntityTypeConfiguration<UserPhoto>
         entity.Property(x => x.Status)
             .HasColumnName("status")
             .HasColumnType("photo_status")
-            .HasConversion(
-                x => x.ToString().ToLower(),
-                x => Enum.Parse<PhotoStatus>(x, true))
             .HasDefaultValue(PhotoStatus.Pending);
 
         entity.Property(x => x.IsPrimary).HasColumnName("is_primary").HasDefaultValue(false);
